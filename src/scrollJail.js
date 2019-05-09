@@ -39,6 +39,7 @@ class ScrollJail {
 
     bindResize () {
         window.onresize = () => {
+            this.fakeUrlBar.fixUrlWidth()
             // Chrome has hide its URL bar
             this.active()
         }

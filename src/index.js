@@ -41,6 +41,13 @@ class FakeUrlBar {
         this.el = document.createElement('div')
         this.el.innerHTML = FAKE_EL_HTML
         this.el = this.el.firstChild
+        this.fixUrlWidth()
+    }
+
+    // temp fix: long url will cause the url-wrapper exceed the max-width
+    fixUrlWidth () {
+        let urlWrapper = this.el.getElementsByClassName('fub-url-wrapper')[0]
+        urlWrapper.style.width = `${window.innerWidth - 48 * 2}px`
     }
 
     setUrl (url) {
