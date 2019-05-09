@@ -1,8 +1,13 @@
 # FakeUrlBar
 
-A new trick to fake your address bar.This demo page provides the basic api for using.
+A new trick to fake your address bar. This demo page provides the basic API for using.
 
-[DEMO](https://pionxzh.github.io/FakeUrlBar/)
+[Source](https://jameshfisher.com/2019/04/27/the-inception-bar-a-new-phishing-method/)
+
+![Alt text](/screenshot/example.png)
+
+
+[> DEMO <](https://pionxzh.github.io/FakeUrlBar/)
 
 ## Use Case
 
