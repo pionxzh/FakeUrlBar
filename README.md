@@ -1,24 +1,23 @@
 # FakeUrlBar
 
-A new trick to fake your address bar. This demo page provides the basic API for using.
+Update: This is still working on Chrome latest version (v112) in 2023.
 
-[Source](https://jameshfisher.com/2019/04/27/the-inception-bar-a-new-phishing-method/)
+This is a POC for a new phishing technique called "[The Inception Bar](https://jameshfisher.com/2019/04/27/the-inception-bar-a-new-phishing-method/)" which is described in detail in a blog post by Jim fisher, involves creating a fake address bar that appears when the real address bar of the browser is hidden.
 
-![Alt text](/screenshot/example.png)
+The implementation of this technique involves the following steps:
+- Detection of address bar hiding by monitoring changes to `window.innerHeight`.
+- Silently display the fake address bar at the top of the page.
+- Use of a technique called "Scroll Jail" to prevent the real address bar from appearing when the user scrolls the page.
 
+![screenshot](/screenshot/example.png)
 
-[> DEMO <](https://pionxzh.github.io/FakeUrlBar/)
+[DEMO](https://pionxzh.github.io/FakeUrlBar/)
 
-## Use Case
+## Usage
 
-First of all, require the script from repo's folder `/dist`.
-
-By default, the script will export the `FakeUrlBar` to global.
 ```javascript
-if (window.FakeUrlBar === undefined) return
-
 window.addEventListener('fakeUrlBarActive', e => {
-    /* do something when the fakeUrlBar showed/actived */
+    /* do something when the fakeUrlBar showed/activated */
 })
 
 let fakeUrlBar = new window.FakeUrlBar({
@@ -28,17 +27,6 @@ let fakeUrlBar = new window.FakeUrlBar({
     fakeTopHeight: 100          // The height of the fakeTop hide on the top of the page
 })
 
-// start to listen the hidden of chrome's address bar
+// start to listen on the hiding of address bar
 fakeUrlBar.init()
-```
-
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# build for production with minification
-npm run build
-
 ```
