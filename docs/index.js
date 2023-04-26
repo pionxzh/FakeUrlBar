@@ -1,14 +1,16 @@
 (function () {
     if (window.FakeUrlBar === undefined) return
 
-    window.addEventListener('fakeUrlBarActive', e => {
-        console.log('actived')
-        window.document.getElementById('github-clone').style.top = `${fakeTopHeight}px`
+    const fakeTopHeight = 100
 
-        let controlPanel = document.getElementById('control')
+    window.addEventListener('fakeUrlBarActive', e => {
+        console.log('activated')
+        document.getElementById('github-clone').style.top = `${fakeTopHeight}px`
+
+        const controlPanel = document.getElementById('control')
         controlPanel.classList.remove('blur')
 
-        let fakeJail = window.document.getElementById('scroll-jail')
+        const fakeJail = document.getElementById('scroll-jail')
         fakeJail.scrollTo({
             top: controlPanel.offsetTop,
             left: 0,
@@ -16,35 +18,32 @@
         })
     })
 
-    let url = 'https://www.g00gle.com'
-    let tabCount = 26
-    let highlightHttps = true
-    let fakeTopHeight = 100
 
-    let fakeUrlBar = new window.FakeUrlBar({
-        url: url,
-        tabCount: tabCount,
-        highlightHttps: highlightHttps,
-        fakeTopHeight: fakeTopHeight
+    const fakeUrlBar = new window.FakeUrlBar({
+        url: 'https://www.g00gle.com',
+        tabCount: 26,
+        highlightHttps: true,
+        fakeTopHeight,
     })
-
     fakeUrlBar.init()
 
-    if (fakeUrlBar.isMobile()) {
-        console.log('platform: mobile')
-    } else {
-        console.log('platform: desktop')
+    const isMobile = fakeUrlBar.isMobile()
+    console.log(`platform: ${isMobile ? 'mobile' : 'desktop'}`)
+    if(!isMobile) {
+        document.querySelector('main').style.paddingTop = `64px`
+        document.getElementById('control').classList.remove('blur')
+        document.getElementById('github-clone').style.top = `57px`
     }
 
     // ================================================ //
     // The following code is just for demo controlling  //
     // ================================================ //
 
-    let urlEl = window.document.getElementById('url')
-    let urlBtn = window.document.getElementById('url-btn')
-    let tabEl = window.document.getElementById('tab-count')
-    let httpsLockEl1 = window.document.getElementById('https-lock-1')
-    let httpsLockEl2 = window.document.getElementById('https-lock-2')
+    const urlEl = window.document.getElementById('url')
+    const urlBtn = window.document.getElementById('url-btn')
+    const tabEl = window.document.getElementById('tab-count')
+    const httpsLockEl1 = window.document.getElementById('https-lock-1')
+    const httpsLockEl2 = window.document.getElementById('https-lock-2')
 
     function setUrl (url) {
         urlEl.value = url
@@ -60,12 +59,12 @@
         fakeUrlBar.setHttps(https)
     }
 
-    setUrl(url)
-    setTabCount(tabCount)
-    highlightHttps ? httpsLockEl2.click() : httpsLockEl1.click()
+    setUrl('https://www.g00gle.com')
+    setTabCount(26)
+    true ? httpsLockEl2.click() : httpsLockEl1.click()
 
     urlBtn.addEventListener('click', e => {
-        let newUrl = urlEl.value
+        const newUrl = urlEl.value
         for (let i = 1; i <= newUrl.length; i++) {
             setTimeout(() => {
                 setUrl(newUrl.substr(0, i))
@@ -77,11 +76,11 @@
         setTabCount(tabEl.value)
     })
 
-    window.document.getElementById('plus').addEventListener('click', e => {
+    document.getElementById('plus').addEventListener('click', e => {
         setTabCount(parseInt(tabEl.value) + 1)
     })
 
-    window.document.getElementById('minus').addEventListener('click', e => {
+    document.getElementById('minus').addEventListener('click', e => {
         setTabCount(parseInt(tabEl.value) - 1)
     })
 
@@ -94,7 +93,7 @@
     })
 
     document.getElementById('demo-1').addEventListener('click', e => {
-        let urlList = [
+        const urlList = [
             'https://google.com',
             'facebook.com',
             'https://twitter.com'
